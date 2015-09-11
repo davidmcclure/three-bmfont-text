@@ -1,3 +1,4 @@
+var THREE = require('three');
 var xtend = require('xtend')
 
 module.exports = function(opt) {
