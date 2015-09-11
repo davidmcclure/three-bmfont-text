@@ -10,8 +10,8 @@ module.exports = function(opt) {
 
   var baseUniforms = {}
   textures.forEach(function(tex, i) {
-    baseUniforms['texture' + i] = { 
-      type: 't', 
+    baseUniforms['texture' + i] = {
+      type: 't',
       value: tex
     }
   })
@@ -47,7 +47,7 @@ module.exports = function(opt) {
         "gl_Position = projectionMatrix * modelViewMatrix * vec4( position.xyz, 1.0 );",
       "}"
     ].join("\n"),
-    fragmentShader: [   
+    fragmentShader: [
       "uniform float opacity;",
       "uniform vec3 color;",
       samplers,

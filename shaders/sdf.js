@@ -5,7 +5,7 @@ module.exports = function(opt) {
   opt = opt||{}
   var opacity = typeof opt.opacity === 'number' ? opt.opacity : 1
   var alphaTest = typeof opt.alphaTest === 'number' ? opt.alphaTest : 0.06
-  var smooth = typeof opt.smooth === 'number' ? opt.smooth : 1/16 
+  var smooth = typeof opt.smooth === 'number' ? opt.smooth : 1/16
   return xtend({
     uniforms: {
       opacity: { type: 'f', value: opacity },
@@ -23,7 +23,7 @@ module.exports = function(opt) {
         "gl_Position = projectionMatrix * modelViewMatrix * vec4( position.xyz, 1.0 );",
       "}"
     ].join("\n"),
-    fragmentShader: [   
+    fragmentShader: [
 
       "#define SQRT2 1.4142135623730951",
       "uniform float opacity;",
@@ -34,7 +34,7 @@ module.exports = function(opt) {
       "varying vec2 vUv;",
       "void main() {",
         "vec4 texColor = texture2D(map, vUv);",
-        "float dst = texColor.a;", 
+        "float dst = texColor.a;",
         "float afwidth = smooth * SQRT2 / (2.0 * gl_FragCoord.w);",
         "float alpha = smoothstep(0.5 - afwidth, 0.5 + afwidth, dst);",
 
