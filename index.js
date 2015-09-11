@@ -16,16 +16,16 @@ function TextMesh(opt) {
 
   this._positions = new THREE.BufferAttribute(null, 2)
   this._uvs = new THREE.BufferAttribute(null, 2)
-  if (multipage) 
+  if (multipage)
     this._pages = new THREE.BufferAttribute(null, 1)
   this._indices = new THREE.BufferAttribute(null, 1)
 
-  if (opt) 
+  if (opt)
     this.update(opt)
 
   this.addAttribute('position', this._positions)
   this.addAttribute('uv', this._uvs)
-  if (multipage) 
+  if (multipage)
     this.addAttribute('page', this._pages)
   this.addAttribute('index', this._indices)
 }
@@ -44,7 +44,7 @@ TextMesh.prototype.update = function(opt) {
 
   var font = opt.font
 
-  //determine texture size from font file  
+  //determine texture size from font file
   var texWidth = font.common.scaleW
   var texHeight = font.common.scaleH
 
@@ -53,21 +53,21 @@ TextMesh.prototype.update = function(opt) {
     var bitmap = glyph.data
     return bitmap.width * bitmap.height > 0
   })
-  
+
   //provide visible glyphs for convenience
   this.visibleGlyphs = glyphs;
 
-  //get vec2 quad positions 
+  //get vec2 quad positions
   var positions = getQuadPositions(glyphs, this.layout)
 
   //get vec2 texcoords
   var flipY = opt.flipY !== false
   var uvs = getQuadUVs(glyphs, texWidth, texHeight, flipY)
-    
+
   if (opt.multipage) {
     var pages = getQuadPages(glyphs)
     this._pages.array = pages
-    this._pages.needsUpdate = true  
+    this._pages.needsUpdate = true
   }
 
   //get indices
@@ -85,7 +85,7 @@ TextMesh.prototype.update = function(opt) {
 }
 
 TextMesh.prototype.computeBoundingSphere = function() {
-    if (this.boundingSphere === null) 
+    if (this.boundingSphere === null)
       this.boundingSphere = new THREE.Sphere()
 
   var positions = this.attributes.position.array
@@ -103,7 +103,7 @@ TextMesh.prototype.computeBoundingSphere = function() {
 }
 
 TextMesh.prototype.computeBoundingBox = function() {
-    if (this.boundingBox === null) 
+    if (this.boundingBox === null)
       this.boundingBox = new THREE.Box3()
 
   var bbox = this.boundingBox
@@ -150,7 +150,7 @@ function getQuadUVs(glyphs, texWidth, texHeight, flipY) {
     }
 
     //BL
-    uvs[i++] = u0 
+    uvs[i++] = u0
     uvs[i++] = v1
     //TL
     uvs[i++] = u0
@@ -181,7 +181,7 @@ function getQuadPositions(glyphs, layout) {
     var h = bitmap.height
 
     //BL
-    positions[i++] = x 
+    positions[i++] = x
     positions[i++] = y
     //TL
     positions[i++] = x
